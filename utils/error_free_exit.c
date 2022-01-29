@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:43:02 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/28 16:55:25 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/29 10:48:49 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	free_double(char ***str)
 void	free_all(t_data **data)
 {
 	free_double(&(*data)->paths);
-	free(&data);
+	free(*data);
 	*data = NULL;
 }

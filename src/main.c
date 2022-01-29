@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:35:21 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/28 17:36:31 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/29 10:53:50 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	input_data(&data, argc, argv, envp);
 	pipex(data, envp);
-	free_all(&data);
+//	free_all(&data);
 	return (0);
 }

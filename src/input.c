@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/28 18:35:38 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/29 14:54:26 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,20 @@ void	input_data(t_data **data, int argc, char **argv, char **envp)
 {
 	(*data)->argv = argv;
 	(*data)->arguments = argc;
+	//printf("argc %d, arguments: %d\n", argc, (*data)->arguments);
 	(*data)->nr_cmd = argc - 3;
 
 	(*data)->fd_input = open(argv[1], O_RDONLY, 0644);
 	if ((*data)->fd_input == -1)
 		error_exit("fd_input failed\n");
 
-	(*data)->fd_output = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644); // how to append if command asks 
+	(*data)->fd_output = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644); // how to append if command asks 
 	if ((*data)->fd_output == -1)
 		error_exit("fd_output failed\n");
 
-	(*data)->pipe = 0;
-	(*data)-> i = 1;
+	printf("data->fd_output: %d\n", (*data)->fd_output);
+
+//	(*data)->pipe = 0;
+	(*data)->i = 1;
 	(*data)->paths = get_paths(envp);
 }
