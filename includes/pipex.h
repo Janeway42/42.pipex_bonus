@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:36:42 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/29 13:56:24 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 14:59:01 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_data {
 	int		fd_output;
 	int		arguments;
 	int		nr_cmd;
-//	int		pipe;
 	int		i;
 }				t_data;
 

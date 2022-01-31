@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:35:21 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/29 10:53:50 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 15:00:31 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
-
 	
 //	system("leaks pipex");
 	data = malloc(sizeof(t_data) * 1);

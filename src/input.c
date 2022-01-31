@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/29 14:54:26 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 15:01:04 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ void	input_data(t_data **data, int argc, char **argv, char **envp)
 	if ((*data)->fd_output == -1)
 		error_exit("fd_output failed\n");
 
-	printf("data->fd_output: %d\n", (*data)->fd_output);
-
-//	(*data)->pipe = 0;
-	(*data)->i = 1;
+	(*data)->i = 2;
 	(*data)->paths = get_paths(envp);
 }
