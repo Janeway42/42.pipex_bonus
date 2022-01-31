@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 15:01:04 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 15:54:32 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static char	**get_paths(char **envp)
 
 	position = get_path_position(envp, "PATH=");
 	if (position < 0)
-		error_exit("error path location"); // error free data exit
+		error_exit("error path location");
 	paths = ft_split(envp[position] + 5, ':');
 	if (!paths)
-		error_exit("error paths"); // error free data exit 
+		error_exit("error paths");
 	return (paths);
 }
 
@@ -92,17 +92,11 @@ void	input_data(t_data **data, int argc, char **argv, char **envp)
 {
 	(*data)->argv = argv;
 	(*data)->arguments = argc;
-	//printf("argc %d, arguments: %d\n", argc, (*data)->arguments);
 	(*data)->nr_cmd = argc - 3;
-
 	(*data)->fd_input = open(argv[1], O_RDONLY, 0644);
-	if ((*data)->fd_input == -1)
-		error_exit("fd_input failed\n");
-
-	(*data)->fd_output = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644); // how to append if command asks 
+	(*data)->fd_output = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if ((*data)->fd_output == -1)
 		error_exit("fd_output failed\n");
-
 	(*data)->i = 2;
 	(*data)->paths = get_paths(envp);
 }

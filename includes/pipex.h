@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:36:42 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 14:59:01 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 15:54:14 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*get_path_cmd(char *comand, t_data *data);
 void	execute_start(t_data *data, char **envp, int *fd1);
 void	execute_middle(t_data *data, char **envp, int *fd_a, int *fd_b);
 void	execute_last(t_data *data, char **envp, int *fd_x);
-
 
 /*
 ** error free exit

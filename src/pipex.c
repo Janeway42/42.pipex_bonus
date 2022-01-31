@@ -6,68 +6,80 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:17 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 15:03:02 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/01/31 16:28:14 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	pipex(t_data *data, char **envp)
+static void	first_command(t_data *data, char **envp, int *fd)
 {
-	int		fd1[2];
-	int		fd2[2];
 	pid_t	id_child;
 
-	if (pipe(fd1) == -1)  // open fd1
-		error_exit("faild pipe\n");
 	id_child = fork();
 	if (id_child < 0)
 		error_exit("failed fork\n");
 	if (id_child == 0)
-		execute_start(data, envp, fd1);  // use fd1
+		execute_start(data, envp, fd);
 	close(data->fd_input);
+}
 
+static void	middle_command(t_data *data, char **envp, int *fd_a, int *fd_b)
+{
+	pid_t	id_child;
+
+	id_child = fork();
+	if (id_child < 0)
+		error_exit("failed fork\n");
+	if (id_child == 0)
+		execute_middle(data, envp, fd_a, fd_b);
+	close_fd(fd_a);
+}
+
+static void	last_command(t_data *data, char **envp, int *fd_a, int *fd_b)
+{
+	pid_t	id_child;
+
+	id_child = fork();
+	if (id_child < 0)
+		error_exit("failed fork\n");
+	if (id_child == 0)
+	{
+		if (data->i % 2 == 0)
+			execute_last(data, envp, fd_a);
+		else if (data->i % 2 != 0)
+			execute_last(data, envp, fd_b);
+	}
+	if (data->i % 2 == 0)
+		close_fd(fd_a);
+	else if (data->i % 2 != 0)
+		close_fd(fd_b);
+	close(data->fd_output);
+}
+
+void	pipex(t_data *data, char **envp)
+{
+	int		fd1[2];
+	int		fd2[2];
+
+	if (pipe(fd1) == -1)
+		error_exit("faild pipe\n");
+	first_command(data, envp, fd1);
 	while (data->i < data->nr_cmd)
 	{
 		if (data->i % 2 == 0)
 		{
-			if (pipe(fd2) == -1)  // open fd2
+			if (pipe(fd2) == -1)
 				error_exit("faild pipe\n");
-			id_child = fork();
-			if (id_child < 0)
-				error_exit("failed fork\n");
-			if (id_child == 0)
-				execute_middle(data, envp, fd1, fd2); // execute_uneven
-			close_fd(fd1);  // close fd1
+			middle_command(data, envp, fd1, fd2);
 		}
 		else if (data->i % 2 != 0)
 		{
-			if (pipe(fd1) == -1) // open fd1
+			if (pipe(fd1) == -1)
 				error_exit("faild pipe\n");
-			id_child = fork();
-			if (id_child < 0)
-				error_exit("failed fork\n"); 
-			data->i++;
-			if (id_child == 0)
-				execute_middle(data, envp, fd2, fd1); // execute even
-			close_fd(fd2); //close fd2
+			middle_command(data, envp, fd2, fd1);
 		}
 		data->i++;
 	}
-
-	id_child = fork();
-	if (id_child < 0)
-		error_exit("failed fork\n"); // error, free data, exit 
-	if (id_child == 0)
-	{
-		if (data->i % 2 == 0)
-			execute_last(data, envp, fd1); // even 
-		else if (data->i % 2 != 0)
-			execute_last(data, envp, fd2); // uneven 
-	}
-	if (data->i % 2 == 0)
-		close_fd(fd1);
-	else if (data->i % 2 != 0)
-		close_fd(fd2);
-	close(data->fd_output);
+	last_command(data, envp, fd1, fd2);
 }
