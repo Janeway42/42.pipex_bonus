@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:35:21 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 16:25:27 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/01 11:23:19 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	main(int argc, char **argv, char **envp)
 
 	data = malloc(sizeof(t_data) * 1);
 	if (!data)
-		return (-1);
+	{
+		perror("failed data malloc\n");
+		return (1);
+	}
 	if (argc < 5)
 	{
 		perror("incorect input\nexample: input.txt cmd1 ... cmdn output.txt");
