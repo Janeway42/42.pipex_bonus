@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/28 14:47:50 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/01 15:15:12 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/01 16:42:42 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	execute_last(t_data *data, char **envp, int *fd_x)
 	if (data->argv[data->arguments - 2][0] == '\0')
 		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[data->arguments - 2], ' ');
+	if (!cmd)
+		error_exit("failed split cmd end\n");
 	if (access(*cmd, F_OK) == 0)
 		path_out = *cmd;
 	else
@@ -56,6 +58,8 @@ void	execute_middle(t_data *data, char **envp, int *fd_a, int *fd_b)
 	if (data->argv[data->i + 1][0] == '\0')
 		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[data->i + 1], ' ');
+	if (!cmd)
+		error_exit("failed split cmd middle\n");
 	if (access(*cmd, F_OK) == 0)
 		path = *cmd;
 	else
@@ -82,6 +86,8 @@ void	execute_start(t_data *data, char **envp, int *fd1)
 	if (data->argv[2][0] == '\0')
 		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[2], ' ');
+	if (!cmd)
+		error_exit("failed split cmd start\n");
 	if (access(*cmd, F_OK) == 0)
 		path_in = *cmd;
 	else
