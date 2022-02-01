@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/28 14:47:50 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 15:51:23 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/01 11:09:19 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	execute_last(t_data *data, char **envp, int *fd_x)
 		error_exit("dup2 output failed\n");
 	close(data->fd_output);
 	cmd = ft_split(data->argv[data->arguments - 2], ' ');
-	path_out = get_path_cmd(*cmd, data);
+	if (access(*cmd, F_OK) == 0)
+		path_out = *cmd;
+	else
+		path_out = get_path_cmd(*cmd, data);
 	if (execve(path_out, cmd, envp) == -1)
 		error_exit("failed execve\n");
 }
@@ -49,7 +52,10 @@ void	execute_middle(t_data *data, char **envp, int *fd_a, int *fd_b)
 	close_fd(fd_a);
 	close_fd(fd_b);
 	cmd = ft_split(data->argv[data->i + 1], ' ');
-	path = get_path_cmd(*cmd, data);
+	if (access(*cmd, F_OK) == 0)
+		path = *cmd;
+	else
+		path = get_path_cmd(*cmd, data);
 	if (execve(path, cmd, envp) == -1)
 		error_exit("failed execve 2\n");
 }
@@ -70,7 +76,10 @@ void	execute_start(t_data *data, char **envp, int *fd1)
 	close_fd(fd1);
 	close(data->fd_input);
 	cmd = ft_split(data->argv[2], ' ');
-	path_in = get_path_cmd(*cmd, data);
+	if (access(*cmd, F_OK) == 0)
+		path_in = *cmd;
+	else
+		path_in = get_path_cmd(*cmd, data);
 	if (execve(path_in, cmd, envp) == -1)
 		error_exit("failed execve 1\n");
 }

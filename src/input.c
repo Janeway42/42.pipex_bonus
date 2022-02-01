@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/01/31 15:54:32 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/01 11:09:30 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_path_position(char **envp, char *str)
 	int		i;
 
 	i = 0;
-	while (envp)
+	while (*envp)
 	{
 		if (ft_strncmp(*envp, str, 5) == 0)
 			return (i);
@@ -74,7 +74,7 @@ char	*get_path_cmd(char *comand, t_data *data)
 	char	*the_one;
 
 	temp = data->paths;
-	while (temp)
+	while (*temp)
 	{
 		the_one = join_three(*temp, "/", comand);
 		if (the_one == NULL)
@@ -94,6 +94,8 @@ void	input_data(t_data **data, int argc, char **argv, char **envp)
 	(*data)->arguments = argc;
 	(*data)->nr_cmd = argc - 3;
 	(*data)->fd_input = open(argv[1], O_RDONLY, 0644);
+	if ((*data)->fd_input == -1)
+		error_exit("fd_input failed\n");
 	(*data)->fd_output = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if ((*data)->fd_output == -1)
 		error_exit("fd_output failed\n");
