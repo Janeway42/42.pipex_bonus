@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:36:42 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/01 11:17:29 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/04 15:23:04 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	execute_last(t_data *data, char **envp, int *fd_x);
 ** error free exit
 */
 
+void	error_command(char *cmd, char *str);
 void	free_double(char ***str);
 void	error_exit(char *str);
 void	close_fd(int *fd);

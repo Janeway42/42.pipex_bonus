@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/28 14:47:50 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/01 16:42:42 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/04 15:05:50 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	execute_last(t_data *data, char **envp, int *fd_x)
 	if (dup2(data->fd_output, 1) == -1)
 		error_exit("dup2(output) - execute_last - failed\n");
 	close(data->fd_output);
-	if (data->argv[data->arguments - 2][0] == '\0')
-		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[data->arguments - 2], ' ');
 	if (!cmd)
 		error_exit("failed split cmd end\n");
@@ -55,8 +53,6 @@ void	execute_middle(t_data *data, char **envp, int *fd_a, int *fd_b)
 		error_exit("dup2(fd_b[1]) - execute_middle - failed\n");
 	close_fd(fd_a);
 	close_fd(fd_b);
-	if (data->argv[data->i + 1][0] == '\0')
-		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[data->i + 1], ' ');
 	if (!cmd)
 		error_exit("failed split cmd middle\n");
@@ -83,8 +79,6 @@ void	execute_start(t_data *data, char **envp, int *fd1)
 		error_exit("dup2(fd1[1]) - execute_start - failed\n");
 	close_fd(fd1);
 	close(data->fd_input);
-	if (data->argv[2][0] == '\0')
-		error_exit("empty comand argument\n");
 	cmd = ft_split(data->argv[2], ' ');
 	if (!cmd)
 		error_exit("failed split cmd start\n");

@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/26 12:43:02 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/01 10:52:45 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/04 15:36:41 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 void	error_exit(char *str)
 {
-	perror(str);
+	ft_putstr_fd(str, 2);
 	write(1, "\n", 1);
 	exit(1);
+}
+
+void	error_command(char *cmd, char *str)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(str, 2);
+	exit(127);
 }
 
 void	close_fd(int *fd)

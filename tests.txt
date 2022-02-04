@@ -1,0 +1,37 @@
+< input.txt ls | ls | wc > output.txt
+./pipex input.txt "ls" "ls" "wc" output.txt
+
+< input.txt ls | lss | wc > output.txt
+./pipex input.txt "ls" "lss" "wc" output.txt
+
+< libft ls | cat -e > output.txt
+./pipex libft "ls" "cat -e" output.txt
+
+< input.txt grep portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
+./pipex input.txt "grep portocala" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wc -l" output.txt
+
+< input.txt grepp portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
+./pipex input.txt "grepp portocala" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wc -l" output.txt
+
+< input.txt grep portocala | grepp portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
+./pipex input.txt "grep portocala" "grepp portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wc -l" output.txt
+
+< input.txt grep portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grepp por | grepp po | grepp p | wc -l > output.txt
+./pipex input.txt "grep portocala" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grepp por" "grepp po" "grepp p" "wc -l" output.txt
+
+< input.txt grep portocala | grepp portocal | grepp portoca | grepp portoc | grepp porto | grepp port | grepp por | grepp po | grepp p | wc -l > output.txt
+./pipex input.txt "grep portocala" "grepp portocal" "grepp portoca" "grepp portoc" "grepp porto" "grepp port" "grepp por" "grepp po" "grepp p" "wc -l" output.txt
+
+< input.txt grep portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wcc -l > output.txt
+./pipex input.txt "grep portocala" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wcc -l" output.txt
+
+< input.txt tr a b | tr b c > output.txt
+./pipex "input.txt" "tr a b" "tr b c" "output.txt"
+
+< input.txt ls -l | wc -l > output.txt
+./pipex "input.txt" "ls -l" "wc -l" "output.txt"
+
+----------------  here_doc  ----------------
+
+<< END rev | sort -r | tr '\n' ' ' >> output.txt
+./pipex "here_doc" "END" "rev" "sort -r" "tr '\n' ' '" "output.txt"

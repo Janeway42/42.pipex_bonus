@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/01 15:01:27 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/04 15:36:50 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_path_cmd(char *comand, t_data *data)
 		free(the_one);
 		temp++;
 	}
-	error_exit("command invalid\n");
+	error_command(comand, " :command not found\n");
 	return (0);
 }
 
