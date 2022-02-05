@@ -31,7 +31,7 @@
 < input.txt ls -l | wc -l > output.txt
 ./pipex "input.txt" "ls -l" "wc -l" "output.txt"
 
-< input.txt  | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
+< input.txt "" | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
 ./pipex input.txt "" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wc -l" output.txt
 
 < input.txt grep portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | "" | "" | wc -l > output.txt
