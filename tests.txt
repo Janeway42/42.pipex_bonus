@@ -31,7 +31,34 @@
 < input.txt ls -l | wc -l > output.txt
 ./pipex "input.txt" "ls -l" "wc -l" "output.txt"
 
+< input.txt  | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | grep po | grep p | wc -l > output.txt
+./pipex input.txt "" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "grep po" "grep p" "wc -l" output.txt
+
+< input.txt grep portocala | grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | "" | "" | wc -l > output.txt
+./pipex input.txt "grep portocala" "grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "" "" "wc -l" output.txt
+
+< input.txt "" | "" | "" | "" | "" | "" | "" | "" | "" | "" > output.txt
+./pipex input.txt "" "" "" "" "" "" "" "" "" "" output.txt
+
+< input.txt grep portocala | wc -l > output.txt
+./pipex input.txt "grep portocala" "wc -l" output.txt
+
+< input.txt grep portocala | "" > output.txt
+./pipex input.txt "grep portocala" "" output.txt
+
+< input.txt "" | "" > output.txt
+./pipex input.txt "" "" output.txt
+
+< input.txt /bin/ls | wc -l > output.txt
+./pipex "input.txt" "/bin/ls" "wc -l" "output.txt"
+
+< input.txt grep portocala | /usr/bin/grep portocal | grep portoca | grep portoc | grep porto | grep port | grep por | /usr/bin/grep po | grep p | wc -l > output.txt
+./pipex input.txt "grep portocala" "/usr/bin/grep portocal" "grep portoca" "grep portoc" "grep porto" "grep port" "grep por" "/usr/bin/grep po" "grep p" "wc -l" output.txt
+
 ----------------  here_doc  ----------------
 
 << END rev | sort -r | tr '\n' ' ' >> output.txt
 ./pipex "here_doc" "END" "rev" "sort -r" "tr '\n' ' '" "output.txt"
+
+----------------  unset PATH  ----------------
+bash / unset PATH

@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/04 15:36:50 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/05 12:11:07 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**get_paths(char **envp)
 
 	position = get_path_position(envp, "PATH=");
 	if (position < 0)
-		error_exit("error path location");
+		error_exit("error PATH location");
 	paths = ft_split(envp[position] + 5, ':');
 	if (!paths)
 		error_exit("error paths");
