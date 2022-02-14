@@ -6,7 +6,7 @@
 /*   By: cpopa <cpopa@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/24 12:07:01 by cpopa         #+#    #+#                 */
-/*   Updated: 2022/02/05 12:11:07 by cpopa         ########   odam.nl         */
+/*   Updated: 2022/02/14 17:29:13 by cpopa         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**get_paths(char **envp)
 
 	position = get_path_position(envp, "PATH=");
 	if (position < 0)
-		error_exit("error PATH location");
+		return (NULL);
 	paths = ft_split(envp[position] + 5, ':');
 	if (!paths)
 		error_exit("error paths");
@@ -73,6 +73,13 @@ char	*get_path_cmd(char *comand, t_data *data)
 	char	**temp;
 	char	*the_one;
 
+	if (data->paths == NULL)
+	{
+		if (access(comand, F_OK) == 0)
+			return (comand);
+		else
+			error_command(comand, " :command not found\n");
+	}
 	temp = data->paths;
 	while (*temp)
 	{
@@ -84,6 +91,8 @@ char	*get_path_cmd(char *comand, t_data *data)
 		free(the_one);
 		temp++;
 	}
+	if (access(comand, F_OK) == 0)
+		return (comand);
 	error_command(comand, " :command not found\n");
 	return (0);
 }
