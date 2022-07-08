@@ -1,4 +1,4 @@
-# pipex_bonus
+# pipex with multiple pipes
 
 Handling pipes in shell. 
 
